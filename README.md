@@ -1,2 +1,2 @@
-# doddle-benchmark
-:candy: Benchmarking doddle-model
+## doddle-benchmark
+Benchmarking `doddle-model` implementations
