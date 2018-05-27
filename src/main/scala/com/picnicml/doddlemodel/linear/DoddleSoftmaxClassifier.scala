@@ -15,8 +15,8 @@ object DoddleSoftmaxClassifier extends App with TimingUtils {
 
   def trainingPredictionTimes: (Double, Double) = {
     val (trainedSoftmax, timeTr) = time("Training") { softmax.fit(xTr, yTr) }
-    val (_, timeTe) = time("Prediction") { trainedSoftmax.predict(xTe) }
-    (timeTr, timeTe)
+    val (_, timePr) = time("Prediction") { trainedSoftmax.predict(xTe) }
+    (timeTr, timePr)
   }
 
   val (timesTrTot, timesPrTot) = (1 to 50).foldLeft((List[Double](), List[Double]())) { case ((timesTr, timesPr), _) =>
@@ -32,5 +32,5 @@ object DoddleSoftmaxClassifier extends App with TimingUtils {
 
   println(f"Training time: ${mean(timesTr)}%1.3fs (+/- ${2 * stddev(timesTr)}%1.3fs)")
   println(f"Prediction time: ${mean(timesPr)}%1.3fs (+/- ${2 * stddev(timesPr)}%1.3fs)")
-  println(s"Test set accuracy: ${accuracy(yTe, yTePred)}%1.4f")
+  println(f"Test set accuracy: ${accuracy(yTe, yTePred)}%1.4f")
 }
