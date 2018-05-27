@@ -22,7 +22,7 @@ X_te /= 255
 training_times = []
 prediction_times = []
 
-for _ in range(2):
+for _ in range(50):
     softmax = LogisticRegression(tol=1e-4, C=1e10, solver='lbfgs', multi_class='multinomial')
     t0 = time.time()
     softmax.fit(X_tr, y_tr)
