@@ -30,7 +30,9 @@ All experiments ran multiple times (iterations) for all implementations and with
 </table>
 
 #### Logistic Regression
-- todo
+- dataset with 80000 training examples and 20000 test examples (250 features)
+- each experiment ran for 100 iterations
+- [scikit-learn code](src/main/scala/com/picnicml/doddlemodel/linear/sklearn_logistic_regression.py), [doddle-model code](src/main/scala/com/picnicml/doddlemodel/linear/DoddleLogisticRegression.scala)
 
 <table>
 <tr>
@@ -41,15 +43,15 @@ All experiments ran multiple times (iterations) for all implementations and with
 </tr>
 <tr>
   <td>scikit-learn</td>
-  <td>todo</td>
-  <td>todo</td>
-  <td>todo</td>
+  <td>0.8389</td>
+  <td>2.789s (+/- 0.090s)</td>
+  <td>0.005s (+/- 0.006s)</td>
 </tr>
 <tr>
   <td>doddle-model</td>
-  <td>todo</td>
-  <td>todo</td>
-  <td>todo</td>
+  <td>0.8377</td>
+  <td>3.080s (+/- 0.665s)</td>
+  <td>0.025s (+/- 0.025s)</td>
 </tr>
 </table>
 
