@@ -1,7 +1,7 @@
 ## doddle-benchmark
 Benchmarking [doddle-model](https://github.com/picnicml/doddle-model) implementations.
 
-All experiments ran multiple times (iterations) for all implementations and with fixed hyperparameters selected in a way such that models yielded similar test set performance.
+All experiments ran multiple times (iterations) for all implementations and with fixed hyperparameters, selected in a way such that models yielded similar test set performance.
 
 #### Linear Regression
 - dataset with 150000 training examples and 27147 test examples (10 features)
