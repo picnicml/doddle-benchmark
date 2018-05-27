@@ -41,3 +41,5 @@ project/plugins/project/
 
 # Custom
 .DS_Store
+*.csv
+env/
