@@ -80,3 +80,15 @@ All experiments ran multiple times (iterations) for all implementations and with
   <td>0.042s (+/- 0.032s)</td>
 </tr>
 </table>
+
+### Setup
+
+To run the tests locally you will need to publish a local snapshot version of the repository.
+
+```
+    git clone https://github.com/picnicml/doddle-model.git
+    cd doddle-model
+    sbt publishLocal
+```
+
+Ensure the published version matches the version contained within the `project/Dependencies.scala` file.
