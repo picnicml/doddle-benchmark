@@ -83,6 +83,14 @@ All experiments ran multiple times (iterations) for all implementations and with
 
 ### Setup
 
+Downloading the test data (currently only MNist):
+
+```python
+    cd src/main/resources
+    pip3 install -r requirements.txt
+    python3 run DownloadMnist.py
+```
+
 To run the tests locally you will need to publish a local snapshot version of the repository.
 
 ```
