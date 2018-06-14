@@ -1,4 +1,4 @@
-package com.picnicml.doddlemodel
+package com.picnicml.doddlemodel.utils
 
 trait TimingUtils {
 
@@ -7,7 +7,6 @@ trait TimingUtils {
     val start = System.currentTimeMillis
     val res = block
     val totalTime = System.currentTimeMillis - start
-    // println(s"$what time: ${totalTime / 1000.0}s")
     (res, totalTime / 1000.0)
   }
 }

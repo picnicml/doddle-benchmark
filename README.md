@@ -38,16 +38,29 @@ By default the data dir is set to a folder named 'scikit_learn_data' your home f
 
 The baseline dataset that are already may not be substantially large enough to for benchmarking therefor a second script **RunGenerator.py** to make either classification or regression dataset. Edit the parameters in the script and then run. The parameters that are defined are the default used to benchmark the two implementations.
 
-# Softmax Classifier
-
-Dataset Name:    **Softmax_data.csv**
-Sample Size:    100,000
-
-Run benchmarks - TODO
-
 # Linear Regression
 
 Dataset Name:   **Regression_data.csv**
 Sample Size:    100,000
 
-Run benchmarks - TODO
+Run benchmarks - ```jmh:run -bm AverageTime -i 20 -wi 20 -f1 -t1 .*JMH_Linear*```
+
+# Logistic Regression
+
+Dataset Name:   **Logistic_data.csv**
+Sample Size:    100,000
+
+Run benchmarks - ```jmh:run -bm AverageTime -i 20 -wi 20 -f1 -t1 .*JMH_Logistic*```
+
+# Softmax Classifier
+
+Dataset Name:   **Softmax_data.csv**
+Sample Size:    100,000
+
+Run benchmarks - ```jmh:run -bm AverageTime -i 20 -wi 20 -f1 -t1 .*JMH_Softmax*```
+
+##### Benchmark modes
+
+Available modes are: [Throughput, AverageTime, SampleTime, SingleShotTime, All]
+
+    -bm <mode>
