@@ -1,0 +1,57 @@
+# -*- coding: utf-8 -*-
+""" Linear Regresison
+"""
+import logging
+import math
+import time
+
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+
+# Load the data into memory
+file_name = ""
+data = pd.read_csv(file_name, header=None).values
+training_set_size = 80000
+benchmark_iterations = 1000
+
+# Split the data
+X_tr, y_tr = data[:training_set_size, :-1], data[:training_set_size, -1]
+X_te, y_te = data[training_set_size:, :-1], data[training_set_size:, -1]
+
+
+def timeit(method):
+    def timed(*args, **kw):
+        ts = time.time()
+        result = method(*args, **kw)
+        execution_time = time.time() - ts
+        logging.info('Method: {} - {} seconds'.format(method.__name__,
+                                                      execution_time))
+        return execution_time, result
+
+    return timed
+
+
+@timeit
+def run_fit(model):
+    return model.fit(X_tr, y_tr)
+
+
+@timeit
+def run_prediction(model):
+    return model.predict(X_te)
+
+
+models = [LinearRegression(normalize=False) for _ in range(benchmark_iterations)]
+
+training_ops = [run_fit(each_model) for each_model in models]
+prediction_ops = [run_prediction(model_time[1]) for model_time in training_ops]
+
+training_times = np.array([items[0] for items in training_ops])
+y_te_pred = prediction_ops[-1][1]
+prediction_times = np.array([items[0] for items in prediction_ops])
+
+print("Training time: {:.3f}s (+/- {:.3f}s)".format(training_times.mean(), 2 * training_times.std()))
+print("Prediction time: {:.3f}s (+/- {:.3f}s)".format(prediction_times.mean(), 2 * prediction_times.std()))
+print("Test set RMSE: {:.4f}".format(math.sqrt(mean_squared_error(y_te, y_te_pred))))
