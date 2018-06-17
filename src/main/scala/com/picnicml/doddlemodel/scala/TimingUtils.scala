@@ -1,4 +1,4 @@
-package com.picnicml.doddlemodel.utils
+package com.picnicml.doddlemodel.scala
 
 trait TimingUtils {
 

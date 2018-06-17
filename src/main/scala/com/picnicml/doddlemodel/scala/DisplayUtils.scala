@@ -1,4 +1,4 @@
-package com.picnicml.doddlemodel.utils
+package com.picnicml.doddlemodel.scala
 
 import breeze.linalg.DenseVector
 import breeze.stats.{mean, stddev}

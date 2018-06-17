@@ -1,7 +1,8 @@
-package com.picnicml.doddlemodel.linear
+package com.picnicml.doddlemodel.scala
 
 import breeze.linalg.DenseMatrix
 import com.picnicml.doddlemodel.data.loadCsvDataset
+import com.picnicml.doddlemodel.linear.LinearRegression
 import org.openjdk.jmh.annotations.Benchmark
 
 class JMH_LinearRegression {
