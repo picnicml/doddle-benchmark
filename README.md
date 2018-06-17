@@ -1,82 +1,68 @@
-## doddle-benchmark
-Benchmarking [doddle-model](https://github.com/picnicml/doddle-model) implementations.
+# doddle-benchmark
 
-All experiments ran multiple times (iterations) for all implementations and with fixed hyperparameters, selected in a way such that models yielded similar test set performance.
+Benchmarking the [doddle-model](https://github.com/picnicml/doddle-model) implementations, against [Scikit-Learn](http://scikit-learn.org/stable/index.html).
 
-#### Linear Regression
-- dataset with 150000 training examples and 27147 test examples (10 features)
-- each experiment ran for 100 iterations
-- [scikit-learn code](src/main/scala/com/picnicml/doddlemodel/linear/sklearn_linear_regression.py), [doddle-model code](src/main/scala/com/picnicml/doddlemodel/linear/DoddleLinearRegression.scala)
+All experiments ran multiple times, using *sbt-jmh*, for all implementations and with fixed hyperparameters, selected in a way such that models yielded similar performance.
 
-<table>
-<tr>
-  <th>Implementation</th>
-  <th>RMSE</th>
-  <th>Training Time</th>
-  <th>Prediction Time</th>
-</tr>
-<tr>
-  <td>scikit-learn</td>
-  <td>3.0936</td>
-  <td>0.042s (+/- 0.014s)</td>
-  <td>0.002s (+/- 0.002s)</td>
-</tr>
-<tr>
-  <td>doddle-model</td>
-  <td>3.0936</td>
-  <td>0.053s (+/- 0.061s)</td>
-  <td>0.002s (+/- 0.004s)</td>
-</tr>
-</table>
+## Implemented Algorithms
 
-#### Logistic Regression
-- dataset with 80000 training examples and 20000 test examples (250 features)
-- each experiment ran for 100 iterations
-- [scikit-learn code](src/main/scala/com/picnicml/doddlemodel/linear/sklearn_logistic_regression.py), [doddle-model code](src/main/scala/com/picnicml/doddlemodel/linear/DoddleLogisticRegression.scala)
+*   Linear Regression
+*   Clustering **in-progress*
 
-<table>
-<tr>
-  <th>Implementation</th>
-  <th>Accuracy</th>
-  <th>Training Time</th>
-  <th>Prediction Time</th>
-</tr>
-<tr>
-  <td>scikit-learn</td>
-  <td>0.8389</td>
-  <td>2.789s (+/- 0.090s)</td>
-  <td>0.005s (+/- 0.006s)</td>
-</tr>
-<tr>
-  <td>doddle-model</td>
-  <td>0.8377</td>
-  <td>3.080s (+/- 0.665s)</td>
-  <td>0.025s (+/- 0.025s)</td>
-</tr>
-</table>
+## Setup
 
-#### Softmax Classifier
-- MNIST dataset with 60000 training examples and 10000 test examples (784 features)
-- each experiment ran for 50 iterations
-- [scikit-learn code](src/main/scala/com/picnicml/doddlemodel/linear/sklearn_softmax_classifier.py), [doddle-model code](src/main/scala/com/picnicml/doddlemodel/linear/DoddleSoftmaxClassifier.scala)
+#### Setup [doddle-model](https://github.com/picnicml/doddle-model)
 
-<table>
-<tr>
-  <th>Implementation</th>
-  <th>Accuracy</th>
-  <th>Training Time</th>
-  <th>Prediction Time</th>
-</tr>
-<tr>
-  <td>scikit-learn</td>
-  <td>0.9234</td>
-  <td>21.243s (+/- 0.303s)</td>
-  <td>0.074s (+/- 0.018s)</td>
-</tr>
-<tr>
-  <td>doddle-model</td>
-  <td>0.9223</td>
-  <td>25.749s (+/- 1.813s)</td>
-  <td>0.042s (+/- 0.032s)</td>
-</tr>
-</table>
+To run the tests locally you will need to publish a local snapshot version of the repository.
+
+    git clone https://github.com/picnicml/doddle-model.git
+    cd doddle-model
+    sbt publishLocal
+
+Ensure the published version matches the version contained within the `project/Dependencies.scala` file.
+
+
+#### Test Data
+
+All test data will need to be downloaded using [Scikit-Learn], to do this simply run the Python script located in the resources folder called **.
+
+    cd src/main/resources
+    pip install -r requirements.txt
+    python AcquireDataset.py [dataset as argument]
+
+By default the data dir is set to a folder named 'scikit_learn_data' your home folder.
+
+The baseline dataset that are already may not be substantially large enough to for benchmarking therefor a second script **RunGenerator.py** to make either classification or regression dataset. Edit the parameters in the script and then run. The parameters that are defined are the default used to benchmark the two implementations.
+
+# Linear Regression
+
+Dataset Name:   **Regression_data.csv**
+Sample Size:    100,000
+
+Run benchmarks - ```jmh:run -bm AverageTime -i 20 -wi 20 -f1 -t1 .*JMH_Linear*```
+
+# Logistic Regression
+
+Dataset Name:   **Logistic_data.csv**
+Sample Size:    100,000
+
+Run benchmarks - ```jmh:run -bm AverageTime -i 20 -wi 20 -f1 -t1 .*JMH_Logistic*```
+
+# Softmax Classifier
+
+Dataset Name:   **Softmax_data.csv**
+Sample Size:    100,000
+
+Run benchmarks - ```jmh:run -bm AverageTime -i 20 -wi 20 -f1 -t1 .*JMH_Softmax*```
+
+##### Benchmark modes
+
+Available modes are: [Throughput, AverageTime, SampleTime, SingleShotTime, All]
+
+    -bm <mode>
+
+##### Getting Machine Specs
+
+To obtain your machines specs run the following command:
+
+    cat /proc/cpuinfo
