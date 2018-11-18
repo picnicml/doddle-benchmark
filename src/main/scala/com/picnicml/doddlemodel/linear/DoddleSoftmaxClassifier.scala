@@ -5,6 +5,7 @@ import breeze.stats.{mean, stddev}
 import com.picnicml.doddlemodel.TimingUtils
 import com.picnicml.doddlemodel.data.loadCsvDataset
 import com.picnicml.doddlemodel.metrics.accuracy
+import com.picnicml.doddlemodel.syntax.ClassifierSyntax._
 
 object DoddleSoftmaxClassifier extends App with TimingUtils {
   val data = loadCsvDataset("src/main/scala/com/picnicml/doddlemodel/linear/mnist.csv", headerLine = false)
